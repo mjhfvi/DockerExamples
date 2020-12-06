@@ -1,0 +1,47 @@
+# Test dockerfile (image)
+# use with:   docker build -f jenkinsfile -t jenkins/basic --pull .
+
+FROM ubuntu:latest
+
+# Update The System
+RUN apt-get update
+
+# Upgrade the systemd
+RUN apt-get -y upgrade
+
+# Install Dependency Packeges
+RUN apt-get install -y --no-install-recommends \
+       apt-utils \
+       python3-setuptools \
+       python3-pip \
+       software-properties-common \
+	   curl \
+	   wget
+
+# Clean APT Cache
+RUN apt-get autoclean
+RUN apt-get clean
+
+# Set environment variables.
+ENV HOME /root
+
+# Define working directory.
+WORKDIR /root
+
+#Adding Repository to source.list
+RUN echo deb https://pkg.jenkins.io/debian-stable binary/ >> /etc/apt/sources.list.d/jenkins.list
+
+# Update The System
+RUN apt-get update
+
+#Adding GPG Keys
+RUN curl -sSL https://download.docker.com/linux/ubuntu/gpg | gpg --import -
+
+#Installing Java Package
+RUN apt-get install -y openjdk-8-jdk
+
+#Installing Jenkins Package
+RUN apt-get install -y jenkins
+
+#Exposing port 8080
+EXPOSE 8080

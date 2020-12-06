@@ -1,0 +1,27 @@
+# Test dockerfile (image)
+# use with:   docker build -f ubuntufile -t ubuntu/basic --pull .
+
+FROM ubuntu:latest
+
+# Update The System
+RUN apt-get update
+
+# Upgrade the systemd
+RUN apt-get -y upgrade
+
+# Install Dependency Packeges
+RUN apt-get install -y --no-install-recommends \
+       apt-utils \
+       python3-setuptools \
+       python3-pip \
+       software-properties-common
+
+# Clean APT Cache
+RUN apt-get autoclean
+RUN apt-get clean
+
+# Set environment variables.
+ENV HOME /root
+
+# Define working directory.
+WORKDIR /root
