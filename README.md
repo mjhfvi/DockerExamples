@@ -1,3 +1,6 @@
+# Tested on Ubuntu 20.04 Server, hosted on ESXi Server 7.0.1
+docker version 19.03
+
 # Docker-Examples
 Docker Scripts and Examples
 
