@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  bb-app:
+    image: ansible/awx
+    ports:
+      - "80:80"
+    
+      
+      
+## deply with 
+## docker stack deploy -c awx.yaml awx
+
+

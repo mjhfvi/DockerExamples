@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  bb-app:
+    image: portainer/portainer
+    ports:
+      - "9000:9000"
+      
+      
+      
+## deply with 
+## docker stack deploy -c portainer.yaml portainer
