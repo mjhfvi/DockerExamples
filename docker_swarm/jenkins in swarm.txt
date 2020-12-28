@@ -11,5 +11,6 @@ services:
       
 ## deply with 
 ## docker stack deploy -c jenkins.yaml jenkins
+# source https://yallalabs.com/devops/how-to-deploy-jenkins-docker-swarm/
 
 
