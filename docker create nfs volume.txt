@@ -1,0 +1,9 @@
+docker volume create --driver local \
+    --opt type=nfs \
+    --opt o=addr=192.168.50.79,rw \
+    --opt device=:/mnt/sharedfolder \
+    sharestorage
+    
+    
+# check if exist
+docker volume ls

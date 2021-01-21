@@ -1,0 +1,23 @@
+# source: https://rangle.io/blog/running-jenkins-and-persisting-state-locally-using-docker-2/
+
+# create volume for container
+docker volume create volumejenkins
+
+# build container with volume and expose port 8080
+docker container run -d \
+    -p 8081:8080 \
+    -v volumejenkins:/var/jenkins_home \
+    --name jenkins-container-first \
+    jenkins/jenkins:lts
+	
+# get admin password from container for website	
+docker container exec \
+    jenkins-container \
+    sh -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+	
+# build container with volume and expose port 8081
+docker container run -d \
+    -p 8081:8080 \
+    -v volumejenkins:/var/jenkins_home \
+    --name jenkins-container-second \
+    jenkins/jenkins:lts

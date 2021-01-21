@@ -1,0 +1,26 @@
+## enable tcp connection  https://gist.github.com/styblope/dc55e0ad2a9848f2cc3307d4819d819f
+
+# add line to daemon.json file
+vi /etc/docker/daemon.json
+
+{"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]}
+ 
+# open a file and add line to override.conf file for docker service
+mkdir -p /etc/systemd/system/docker.service.d/
+vi /etc/systemd/system/docker.service.d/override.conf 
+
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd
+
+
+# Reload the systemd daemon and Restart docker service
+
+systemctl daemon-reload
+systemctl restart docker.service
+
+# test connection 
+curl localhost:2375
+
+# connect to server ip:2375
+192.168.50.75:2375
