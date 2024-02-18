@@ -5,11 +5,10 @@ ARG NGINX_VERSION=1.24.0
 FROM nginx:${NGINX_VERSION:-latest}
 
 # Optional: Display the used version
-RUN echo "Using Nginx version: ${NGINX_VERSION}"
+RUN echo "Building Docker Image Using Nginx version: ${NGINX_VERSION}"
 
 # Run Nginx as non-root user
-RUN useradd -r -M nginx && \
-    chown -R nginx:nginx /var/lib/nginx /etc/nginx
+# RUN useradd -r -M nginx && chown -R nginx:nginx /var/lib/nginx /etc/nginx
 
 # Copy custom configuration (replace with your actual file)
 COPY nginx.conf /etc/nginx/nginx.conf
