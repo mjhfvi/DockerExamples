@@ -1,0 +1,30 @@
+# define an environment variable in your Dockerfile during container creation
+ARG NGINX_VERSION=1.24.0
+
+# FROM nginx:alpine
+FROM nginx:${NGINX_VERSION:-latest}
+
+# Optional: Display the used version
+RUN echo "Using Nginx version: ${NGINX_VERSION}"
+
+# Run Nginx as non-root user
+RUN useradd -r -M nginx && \
+    chown -R nginx:nginx /var/lib/nginx /etc/nginx
+
+# Copy custom configuration (replace with your actual file)
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 80 (adjust if needed)
+EXPOSE 80
+
+# Use health check (optional)
+HEALTHCHECK CMD /bin/sh -c 'nginx -t && nginx -s reload'
+
+# Secure best practices (consider implementing)
+# - Set strong passwords for user accounts
+# - Install and configure Fail2ban
+# - Enable TLS/SSL with Let's Encrypt
+# - Regularly update Nginx and dependencies
+
+# Entrypoint to start Nginx
+CMD ["nginx", "-g", "daemon off;"]
