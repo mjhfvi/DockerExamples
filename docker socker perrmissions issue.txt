@@ -8,7 +8,7 @@ sudo chmod 666 /var/run/docker.sock
 vi /etc/docker/daemon.json
 
 {"hosts": ["", "unix:///var/run/docker.sock"]}
- 
+
 Add /etc/systemd/system/docker.service.d/override.conf
 
 [Service]

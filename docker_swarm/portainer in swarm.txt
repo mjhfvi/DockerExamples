@@ -5,8 +5,8 @@ services:
     image: portainer/portainer
     ports:
       - "9000:9000"
-      
-      
-      
-## deply with 
+
+
+
+## deploy with
 ## docker stack deploy -c portainer.yaml portainer

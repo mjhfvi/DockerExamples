@@ -1,2 +1,5 @@
 .gitsecret/keys/random_seed
 !*.secret
+secrets-example.txt
+.cache_ggshield
+.gitleaks.toml

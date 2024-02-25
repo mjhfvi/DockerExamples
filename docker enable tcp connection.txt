@@ -4,10 +4,10 @@
 vi /etc/docker/daemon.json
 
 {"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]}
- 
+
 # open a file and add line to override.conf file for docker service
 mkdir -p /etc/systemd/system/docker.service.d/
-vi /etc/systemd/system/docker.service.d/override.conf 
+vi /etc/systemd/system/docker.service.d/override.conf
 
 [Service]
 ExecStart=
@@ -19,7 +19,7 @@ ExecStart=/usr/bin/dockerd
 systemctl daemon-reload
 systemctl restart docker.service
 
-# test connection 
+# test connection
 curl localhost:2375
 
 # connect to server ip:2375

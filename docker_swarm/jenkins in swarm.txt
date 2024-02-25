@@ -6,11 +6,9 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
-      
-      
-      
-## deply with 
+
+
+
+## deploy with
 ## docker stack deploy -c jenkins.yaml jenkins
 # source https://yallalabs.com/devops/how-to-deploy-jenkins-docker-swarm/
-
-

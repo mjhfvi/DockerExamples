@@ -40,10 +40,10 @@ FROM scratch
 # generated images.
 #
 # MAINTAINER <name>
-MAINTAINER FirstName LastName <first.last@company.com>
+LABEL FirstName='' LastName='' email=<first.last@company.com>
 
 # The LABEL instruction adds metadata to an image. A LABEL is a key-value
-# pair. To include spaces within a LABEL value, use quotes and blackslashes
+# pair. To include spaces within a LABEL value, use quotes and backslashes
 # as you would in command-line parsing.
 #
 # To prevent naming conflicts, Docker namespaces label keys using a reverse
@@ -82,7 +82,7 @@ LABEL com.company.key="value"
 # marks it as holding externally mounted volumes from native host or other
 # containers. The value can be a JSON array, VOLUME ["/var/log/"], or a plain
 # string with multiple arguments, such as VOLUME /var/log or VOLUME /var/log
-# /var/db. 
+# /var/db.
 #
 # * The list is parsed as a JSON array, which means that you must use double
 #   quotes (") around words not single-quotes (').
@@ -393,7 +393,7 @@ ENTRYPOINT top -b
 #       shell directly, for example: CMD [ "sh", "-c", "echo $HOME" ].
 #
 # If you would like your container to run the same executable every time,
-# then you should consider using ENTRYPOINT in combination with CMD. 
+# then you should consider using ENTRYPOINT in combination with CMD.
 #
 # CMD ["executable","param1","param2"] (exec form, this is the preferred form)
 # CMD ["param1","param2"] (as default parameters to ENTRYPOINT)

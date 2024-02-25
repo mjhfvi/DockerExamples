@@ -5,10 +5,8 @@ services:
     image: ansible/awx
     ports:
       - "80:80"
-    
-      
-      
-## deply with 
+
+
+
+## deploy with
 ## docker stack deploy -c awx.yaml awx
-
-
