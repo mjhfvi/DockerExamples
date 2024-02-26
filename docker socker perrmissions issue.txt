@@ -1,0 +1,23 @@
+sudo usermod -aG sudo user
+sudo usermod -aG docker user
+sudo chmod 666 /var/run/docker.sock
+
+
+## enable tcp connection  https://gist.github.com/styblope/dc55e0ad2a9848f2cc3307d4819d819f
+
+vi /etc/docker/daemon.json
+
+{"hosts": ["", "unix:///var/run/docker.sock"]}
+
+Add /etc/systemd/system/docker.service.d/override.conf
+
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd
+
+Reload the systemd daemon:
+
+systemctl daemon-reload
+Restart docker:
+
+systemctl restart docker.service
