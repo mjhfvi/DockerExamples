@@ -86,7 +86,7 @@ repos:
     hooks:
       - id: detect-secrets
         name: detect-secrets (module for detecting secrets)
-        args:                                                                          # detect-secrets scan > .secrets.baseline | , '--disable-plugin', 'KeywordDetector'
+        args: # detect-secrets scan > .secrets.baseline | , '--disable-plugin', 'KeywordDetector'
           - --baseline
           - .secrets.baseline
           - --disable-plugin
