@@ -14,20 +14,20 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # set chocolatey version
 ENV chocolateyVersion=1.4.0
 
-# Install Chocolatey
+# Install Chocolatey online
 RUN Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 # Updates the environment variables of the current powershell session
 RUN [Environment]::SetEnvironmentVariable('PATH', $env:PATH, [EnvironmentVariableTarget]::User)
 
-# Verify Chocolatey is installed
+# Verify Chocolatey is installed with version check
 RUN choco --version
 
-# Install  Chocolatey Tools
+# Install Tools with Chocolatey
 RUN choco install git strawberryperl sed 7zip -y
 ### Chocolatey Setup ####
 
-# Clone Nginx Repository
+# Clone Nginx Repository from github
 RUN git clone -b branches/stable-$env:VERSION https://github.com/nginx/nginx.git
 
 # Install Build Tools
@@ -80,7 +80,7 @@ RUN setx /M path "%path%;C:\tools\msys64;c:\msys64;c:\nasm;C:\BuildTools\VC\Tool
 # Change Shell Powrshell
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'Continue'; $verbosePreference='Continue';"]
 
-# Replace Default Document With Edit One
+# Replace Default makefile file
 WORKDIR C:/nginx
 COPY . .
 RUN Remove-Item -Path c:/nginx/auto/lib/openssl/makefile.msvc; `
@@ -90,7 +90,6 @@ RUN Remove-Item -Path c:/nginx/auto/lib/openssl/makefile.msvc; `
 
 # Run the Compile Process
 SHELL ["cmd", "/S", "/C"]
-
 RUN ["C:\\Program Files\\git\\bin\\sh.exe", "C:\\nginx\\compile-nginx.sh"]
 
 # Change Shell x64 Native Tools Command Prompt
@@ -100,16 +99,16 @@ WORKDIR C:/nginx
 USER ContainerAdministrator
 RUN nmake.exe /f C:/nginx/objs/Makefile
 
-# Verify the Nginx Version
+# Output Nginx Version to Screen 
 RUN C:/nginx/objs/nginx.exe -v
 
-# Build the Nginx Image for Windows Nano 2019
+# Build Docker Image Nginx Based on Windows Nano 2019
 FROM mcr.microsoft.com/windows/nanoserver:ltsc2019
 
-# Building Nginx Folder Structure
+# Building Folder Structure for Nginx Image
 RUN mkdir C:\nginx C:\nginx\conf C:\nginx\logs C:\nginx\temp
 
-# Getting the Nginx File from the Previous Build Stage
+# Copy Nginx Files from the Previous Build Stage
 COPY --from=INSTALLER C:\nginx\objs\nginx.exe C:\nginx\
 COPY --from=INSTALLER C:\nginx\conf\. C:\nginx\conf\
 
