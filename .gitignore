@@ -3,3 +3,4 @@
 secrets-example.txt
 .cache_ggshield
 .gitleaks.toml
+.scannerwork/*
