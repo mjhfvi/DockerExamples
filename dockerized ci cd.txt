@@ -1,0 +1,23 @@
+export HOST_GIT_FOLDER=/mnt/c/repository/DevSecLab
+
+timeout 30 docker run --rm -v $HOST_GIT_FOLDER:/tmp/ --memory=128m --cpus="0.5" aquasec/trivy:latest fs --format json /tmp/ 
+
+--output trivy-scan-results.json
+&& sleep 3
+
+docker run -e LOG_LEVEL=DEBUG -e RUN_LOCAL=true -e SAVE_SUPER_LINTER_OUTPUT=true -e SAVE_SUPER_LINTER_SUMMARY=true -v /mnt/c/repository/DevSecLab:/tmp/lint ghcr.io/super-linter/super-linter:latest
+
+
+timeout 30 docker run --rm -v /tmp:/tmp/ --memory=128m --cpus="0.5" bitnami/git:latest git clone https://github.com/mjhfvi/DevSecLab.git /tmp/
+
+docker run -it --rm -v ~/.veracode/credentials:/home/luser/.veracode/credentials -v /host/os/path/to/myapp/:/myapp/ \
+    veracode/pipeline-scan:cmd \
+        --file /myapp/myapp.jar
+
+docker run --rm -p 8080:8080 --env DISPLAY=$DISPLAY --privileged hexcowboy/burpsuite --help
+https://portswigger.net/burp/documentation/desktop/troubleshooting/launch-from-command-line
+
+docker run --rm -i -v /mnt/c/repository/DevSecLab/k6-load-testing:/tmp/ --memory=128m --cpus="0.5" grafana/k6:latest-with-browser run --vus 10 --duration 4s /tmp/script.js
+
+
+docker run --rm -v $(pwd):/tmp/ --memory=128m --cpus="0.5" zaproxy/zap-stable zap.sh -daemon /tmp/zap-baseline.py -t https://www.example.com
