@@ -1,0 +1,25 @@
+Source: https://hub.docker.com/r/linuxserver/homeassistant
+
+# test
+docker run -d \
+  --name=homeassistant \
+  --net=host \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -p 8123:8123 `#optional` \
+  --restart unless-stopped \
+  lscr.io/linuxserver/homeassistant:latest
+
+# add config and device to container
+docker run -d \
+  --name=homeassistant \
+  --net=host \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -p 8123:8123 `#optional` \
+  -v /path/to/data:/config \
+  --device /path/to/device:/path/to/device `#optional` \
+  --restart unless-stopped \
+  lscr.io/linuxserver/homeassistant:latest

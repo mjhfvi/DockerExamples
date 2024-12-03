@@ -1,0 +1,16 @@
+Source: https://hub.docker.com/r/linuxserver/your_spotify
+
+docker run -d \
+  --name=your_spotify \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -e APP_URL=http://localhost \
+  -e SPOTIFY_PUBLIC= \
+  -e SPOTIFY_SECRET= \
+  -e CORS=http://localhost:80,https://localhost:443 \
+  -e MONGO_ENDPOINT=mongodb://mongo:27017/your_spotify \
+  -p 8080:80 \
+  -p 8443:443 \
+  --restart unless-stopped \
+  lscr.io/linuxserver/your_spotify:latest

@@ -1,0 +1,8 @@
+docker run -d -p 1514:1514 -p 8000:8000 -p 8088:8088 -p 8089:8089 -p 9997:9997 \
+	-v /home/tzahi/storage/splunk/var:/opt/splunk/var/ -v /home/tzahi/storage/splunk/etc:/opt/splunk/etc/ \
+	-e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_ENABLE_LISTEN=9997" -e "SPLUNK_PASSWORD=" splunk/splunk:latest
+
+
+-v /home/tzahi/storage/splunk/apps:$SPLUNK_HOME/etc/apps
+ -e "SPLUNK_ENABLE_LISTEN=9997"
+-p 1514:1514 
